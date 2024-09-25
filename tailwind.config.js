@@ -8,6 +8,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Add your TailwindCSS colors
+        primary: "#A40003",
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
