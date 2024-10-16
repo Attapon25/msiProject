@@ -4,14 +4,6 @@ import { authOptions } from "../auth/[...nextauth]/route";
 const prisma = new PrismaClient();
 
 export async function GET(request) {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401,
-    });
-  }
-
   try {
     const categories = await prisma.category.findMany();
     return new Response(JSON.stringify(categories), {
@@ -28,6 +20,13 @@ export async function GET(request) {
 }
 
 export async function POST(req) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+    });
+  }
   try {
     const { name } = await req.json();
     const newCategory = await prisma.category.create({

@@ -10,20 +10,25 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.5.0",
+    "@ducanh2912/next-pwa": "^10.2.9",
     "@prisma/client": "^5.19.1",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
-    "framer-motion": "^11.5.4",
+    "flowbite": "^2.5.1",
+    "framer-motion": "^11.6.0",
+    "google-map-react": "^2.2.1",
     "next": "14.2.11",
     "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
-    "react-toastify": "^10.0.5"
+    "react-toastify": "^10.0.5",
+    "react-webcam": "^7.2.0"
   },
   "devDependencies": {
     "install": "^0.13.0",
     "postcss": "^8",
     "prisma": "^5.19.1",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "webpack": "^5.94.0"
   }
 }

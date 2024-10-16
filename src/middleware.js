@@ -10,9 +10,14 @@ export async function middleware(request) {
   // Get the pathname of the request
   const { pathname } = request.nextUrl;
 
+  // if (pathname === "/services") {
+  //   return NextResponse.redirect(new URL("/login", request.url));
+  // }
+
   // If the pathname starts with /protected and the user is not an admin, redirect to the home page
-  if (pathname.startsWith("/protected") && (!user || user.role !== "admin")) {
-    return NextResponse.redirect(new URL("/", request.url));
+
+  if (pathname.startsWith("/create") && (!user || user.role !== "member")) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (pathname.startsWith("/edit") && user.role !== "member") {

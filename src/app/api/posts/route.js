@@ -1,4 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 const prisma = new PrismaClient();
 
@@ -49,6 +51,14 @@ export async function GET(req) {
 // return Response.json(posts);
 // POST
 export async function POST(request) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+    });
+  }
+
   const { title, content, categoryId } = await request.json();
   const newPost = await prisma.post.create({
     data: { title, content, categoryId: Number(categoryId) },
