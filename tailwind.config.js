@@ -15,6 +15,11 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      borderRadius: {
+        "3xl": "3.5rem",
+        "4xl": "4rem",
+        "5xl": "2.5rem",
+      },
     },
   },
   plugins: [require("flowbite/plugin")],

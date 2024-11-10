@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 function login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // State for storing error messages
+
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -21,9 +23,9 @@ function login() {
       // console.log("email", email, "password", password);
 
       if (result.error) {
-        console.error(result.error);
+        setError("Incorrect password. Please try again.");
       } else {
-        router.push("/home");
+        router.push("/");
       }
     } catch (error) {
       console.log("error", error);
@@ -58,7 +60,7 @@ function login() {
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col items-center">
               <button
-                onClick={() => signIn("google", { callbackUrl: "/home" })}
+                onClick={() => signIn("google", { callbackUrl: "/" })}
                 type="button"
                 // onClick={handleGoogleLogin}
                 // className="px-4 py-2  w-full border-gray-300 shadow-sm  text-black rounded-md hover:bg-red-700 flex items-center justify-center mb-4"
@@ -119,6 +121,9 @@ function login() {
                     required
                     placeholder="Enter your password"
                   />
+                  {error && (
+                    <div className="text-sm text-red-500 mt-2">{error}</div>
+                  )}
                 </div>
                 <div className="mb-6 flex justify-between flex-col items-end">
                   <a
