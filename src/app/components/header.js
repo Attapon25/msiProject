@@ -2,8 +2,10 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getSession } from "next-auth/react";
-import AuthButton from "./AuthButton";
+
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
+
 import { usePathname } from "next/navigation";
 import {
   HomeIcon,
@@ -14,6 +16,8 @@ import {
   ArrowLeftIcon,
 } from "@heroicons/react/24/outline";
 function navbar() {
+  const { data: session, status } = useSession();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname(); // Get the current URL path
 
@@ -77,13 +81,29 @@ function navbar() {
               <CogIcon className="mr-3 h-5 w-5" />
               Settings
             </Link>
-            <Link
-              href="/login"
-              className="flex items-center px-4 py-4 text-gray-700 hover:bg-red-50 rounded-lg cursor-pointer"
-            >
-              <ArrowLeftIcon className="mr-3 h-5 w-5" />
-              <AuthButton />
-            </Link>
+            {session ? (
+              <Link
+                href="/login"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent default link behavior
+                  signOut().then(() => {
+                    window.location.href = "/login"; // Redirect after sign out
+                  });
+                }}
+                className="flex items-center px-4 py-4 text-gray-700 hover:bg-red-50 rounded-lg cursor-pointer"
+              >
+                <ArrowLeftIcon className="mr-3 h-5 w-5" />
+                <p>Log out</p>
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center px-4 py-4 text-gray-700 hover:bg-red-50 rounded-lg cursor-pointer"
+              >
+                <ArrowLeftIcon className="mr-3 h-5 w-5" />
+                <p>Log in</p>
+              </Link>
+            )}
           </nav>
         </div>
       </div>

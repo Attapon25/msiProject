@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 
 import {
   ClockIcon,
@@ -9,6 +10,7 @@ import {
   MapPinIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
+
 const CheckInOutApp = () => {
   const { data: session, status } = useSession();
   console.log("session", session);
@@ -85,10 +87,13 @@ const CheckInOutApp = () => {
 
             {/* Action Buttons */}
             <div className="grid grid-cols-2 gap-6 mt-6">
-              <button className="flex items-center justify-center space-x-2 bg-primary text-white p-6  rounded-5xl hover:bg-red-700">
+              <Link
+                href="/camera"
+                className="flex items-center justify-center space-x-2 bg-primary text-white p-6  rounded-5xl hover:bg-red-700"
+              >
                 <MapPinIcon className="h-10 w-10" />
                 <p>Check In</p>
-              </button>
+              </Link>
               <button className="flex items-center justify-center space-x-2 bg-primary text-white p-6  rounded-5xl hover:bg-red-700">
                 <ClockIcon className="h-10 w-10" />
                 <p>Check Out</p>
