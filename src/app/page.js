@@ -24,13 +24,11 @@ const CheckInOutApp = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-primary">
-      {/* Sidebar - Only visible on desktop */}
-
+    <div className="bg-white">
       {/* Main Content */}
-      <div className="md:pl-80 flex flex-col flex-1">
+      <div className="md:pl-20 flex flex-col flex-1">
         {/* Header */}
-        <div className="bg-primary text-white p-10 flex items-center justify-center">
+        {/* <div>
           {status === "authenticated" && session?.user && (
             <div className="flex items-center space-x-3">
               {session.user.image && (
@@ -52,7 +50,7 @@ const CheckInOutApp = () => {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
         {/* Time Clock Section */}
         <div className="bg-white rounded-se-4xl shadow-sm p-6 h-full pb-24 md:pb-6">
           <div className="p-6">

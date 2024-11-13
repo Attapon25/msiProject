@@ -12,18 +12,25 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+enum Role {
+  ADMIN
+  ASSIST
+  MEMBER
+}
+
 model User {
   id            Int       @id @default(autoincrement())
   name          String?
   email         String    @unique
   password      String?
   image         String?
-  role          String    @default("member") // Add a role field
+  role          Role      @default(MEMBER) // Sets the default role to "member"
   emailVerified DateTime?
   accounts      Account[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
+
 model Account {
   id                 String  @id @default(cuid())
   userId             Int
